@@ -1,0 +1,19 @@
+version: '3.5'
+
+services:
+  allianz-test:
+    build:
+      dockerfile: docker/Dockerfile
+      context: .
+      args:
+        - JAVA_OPTS=-Xdebug -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005
+    image: "allianz-test"
+    container_name: "allianz-test"
+    networks:
+      - allianz-test-network
+volumes:
+  database_data:
+    driver: local
+networks:
+  allianz-test-network:
+    name: allianz-test-network
